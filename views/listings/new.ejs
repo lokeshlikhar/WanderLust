@@ -1,0 +1,133 @@
+<% layout('layouts/boilerplate') -%>
+
+<body>
+  <div class="form-page">
+    <h3>Create New Listing</h3>
+
+    <form action="/listings" method="POST" enctype="multipart/form-data" novalidate class="needs-validation">
+
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+
+        <input type="text" class="form-control" id="title" name="listing[title]" placeholder="Enter title" required>
+
+        <div class="invalid-feedback">
+          Please enter a title.
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+
+        <textarea class="form-control" id="description" name="listing[description]" placeholder="Enter description" required></textarea>
+
+        <div class="invalid-feedback">
+          Please enter a description.
+        </div>
+      </div>
+
+      <!-- Image -->
+      <div class="mb-3">
+        <label for="image" class="form-label">
+          Upload Listing Image
+        </label>
+
+        <input type="file" class="form-control" id="image" name="listing[image]" required>
+      </div>
+
+      <!-- Price & Country -->
+      <div class="row">
+
+        <div class="col-md-5 mb-3">
+          <label for="price" class="form-label">Price</label>
+
+          <input type="number" class="form-control" id="price" name="listing[price]" placeholder="Enter price" required>
+
+          <div class="invalid-feedback">
+            Please enter a valid price.
+          </div>
+        </div>
+
+        <div class="col-md-7 mb-3">
+          <label for="country" class="form-label">Country</label>
+
+          <input type="text" class="form-control" id="country" name="listing[country]" placeholder="Enter country" required>
+
+          <div class="invalid-feedback">
+            Please enter a valid country.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+
+        <input type="text" class="form-control" id="location" name="listing[location]" placeholder="Ex. Jaipur, India" required>
+
+        <div class="invalid-feedback">
+          Please enter a valid location.
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="mb-3">
+
+        <label class="form-label">
+          Categories (Select up to 4)
+        </label>
+
+        <% const categories = [
+          "Beach",
+          "Mountain",
+          "Camping",
+          "Luxury",
+          "Budget",
+          "Nature",
+          "City",
+          "Lake",
+          "Historical",
+          "Adventure",
+          "Island",
+          "Farm Stay"
+        ]; %>
+
+        <div class="row">
+
+          <% categories.forEach(category => { %>
+
+          <div class="col-md-3 col-6 mb-2">
+
+            <div class="form-check">
+
+              <input class="form-check-input category-checkbox" type="checkbox" id="<%= category %>" name="listing[category]" value="<%= category %>">
+
+              <label class="form-check-label" for="<%= category %>">
+                <%= category %>
+              </label>
+
+            </div>
+
+          </div>
+
+          <% }) %>
+
+        </div>
+        <div class="invalid-feedback d-block" id="category-error" style="display:none !important;">
+          You can select a maximum of 4 categories.
+        </div>
+
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn-dark add-btn">
+        Add
+      </button>
+
+    </form>
+
+  </div>
+</body>

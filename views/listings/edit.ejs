@@ -1,0 +1,83 @@
+<% layout('layouts/boilerplate') -%>
+
+<body>
+  <div class="form-page">
+    <h3>Edit your Listing</h3>
+
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control" id="title" required />
+        <div class="valid-feedback">Title Looks good!</div>
+        <div class="invalid-feedback">Invalid Title</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Desciption</label>
+        <textarea name="listing[description]" id="description" class="form-control" required>
+          <%= listing.description %> </textarea>
+        <div class="invalid-feedback">Invalid Description</div>
+      </div>
+      <div class="mb-3">
+        Original Listing Image
+        <br />
+        <img src="<%= originalUrl %>" alt="listingimage" class="edit-image mt-2" />
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input type="file" class="form-control" name="listing[image]" id="image" />
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-5">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" required name="listing[price]" value="<%= listing.price %>" class="form-control" id="price" />
+          <div class="invalid-feedback">Please Enter Valid Price</div>
+        </div>
+
+        <div class="mb-3 col-md-7">
+          <label for="country" class="form-label">Country</label>
+          <input type="text" required name="listing[country]" value="<%= listing.country %>" class="form-control" id="country" />
+          <div class="invalid-feedback">Please Enter Valid Country</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" required name="listing[location]" value="<%= listing.location %>" class="form-control" id="location" />
+        <div class="invalid-feedback">Please Enter Valid Location</div>
+      </div>
+
+      <!-- filter category  -->
+
+      <div class="mb-3">
+        <label class="form-label">Categories (Select up to 4)</label>
+        <% const categories = [ "Beach", "Mountain", "Camping", "Luxury",
+        "Budget", "Nature", "City", "Lake", "Historical", "Adventure", "Island",
+        "Farm Stay" ]; %>
+
+
+
+        <div class="row">
+          <% categories.forEach(category => { %>
+          <div class="col-md-3 col-6 mb-2">
+            <div class="form-check">
+              <input type="checkbox" name="listing[category]" id="<%= category %>" class="form-check-input category-checkbox" value="<%= category %>" <%= listing.category.includes(category) ? "checked" : "" %>>
+              <label class="form-check-label" for="<%= category %>">
+                <%= category %>
+              </label>
+            </div>
+
+          </div>
+          <% }) %>
+        </div>
+        <div class="invalid-feedback d-block" id="category-error" style="display:none !important;">
+          You can select a maximum of 4 categories.
+        </div>
+
+      </div>
+
+      <button class="btn btn-dark mb-2 add-btn">Add</button>
+    </form>
+  </div>
+</body>
