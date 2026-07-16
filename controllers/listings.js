@@ -8,7 +8,7 @@ const geocodingClient = mbxGeocoding({ accessToken: maptoken });
 //index route
 const index = async (req, res) => {
   let allListing = await Listing.find({});
-  res.render("listings/index.ejs", { allListing });
+  res.redirect("listings/index.ejs", { allListing });
 };
 
 //new route
