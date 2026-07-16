@@ -107,6 +107,11 @@ app.use("/listings/:id/reviews", reviewRouter);
 //user route
 app.use("/", userRouter);
 
+//home route
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 //for user who is accessing route which is not defined
 app.use((req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
@@ -122,6 +127,3 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(port, () => {
-  console.log("app is listing");
-});
