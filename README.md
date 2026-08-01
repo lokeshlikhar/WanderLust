@@ -1,4 +1,4 @@
-# 🌍 WanderLust – Airbnb Inspired Listing Platform
+# 🌍 WanderLust –  Full Stack Hotel Listing Platform
 
 A full-stack web application inspired by Airbnb, built using **Node.js, Express.js, MongoDB, and EJS**. Users can explore property listings, create and manage their own listings, upload images, leave reviews, and search destinations through a clean and responsive interface.
 
